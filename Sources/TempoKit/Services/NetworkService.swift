@@ -1,9 +1,9 @@
 import Foundation
 
-public protocol NetworkService {
-    func load(worklog: Request, completion: (([[String: Any]]) -> Void))
+public protocol TempoNetworkService {
+    func load(worklog: TempoRequest, completion: (([[String: Any]]) -> Void))
 }
 
-protocol UsesNetworkService {
-    var networkService: NetworkService { get }
+protocol UsesTempoNetworkService {
+    var tempoNetworkService: TempoNetworkService { get }
 }

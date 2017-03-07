@@ -14,12 +14,12 @@ public protocol UsesTempoKit {
     var tempoKit: TempoKit { get }
 }
 
-public class MixinTempoKit: TempoKit, UsesNetworkService {
-    internal let networkService: NetworkService
+public class MixinTempoKit: TempoKit, UsesTempoNetworkService {
+    internal let tempoNetworkService: TempoNetworkService
     private let baseURL: URL
     
-    public init(baseURL: URL, networkService: NetworkService) {
-        self.networkService = networkService
+    public init(baseURL: URL, networkService: TempoNetworkService) {
+        tempoNetworkService = networkService
         self.baseURL = baseURL
     }
     
@@ -37,7 +37,7 @@ public class MixinTempoKit: TempoKit, UsesNetworkService {
                        accountKey: accountKey,
                        teamId: teamId,
                        baseURL: baseURL)
-        networkService.load(worklog: worklogRequest) { json in
+        tempoNetworkService.load(worklog: worklogRequest) { json in
             completion(parse(jsonLogs: json))            
         }
     }

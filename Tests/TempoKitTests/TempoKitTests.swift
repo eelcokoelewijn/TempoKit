@@ -3,7 +3,7 @@ import XCTest
 
 class TempoKitTests: XCTestCase {
     var baseURL: URL!
-    var networkService: NetworkService!
+    var networkService: TempoNetworkService!
     var entitiesStubs: EntitiesStubs!
     
     override func setUp() {
@@ -27,9 +27,9 @@ class TempoKitTests: XCTestCase {
 }
 
 
-private class NetworkServiceStub: NetworkService {
+private class NetworkServiceStub: TempoNetworkService {
     private let entitiesStubs = EntitiesStubs()
-    fileprivate func load(worklog: Request, completion: (([[String : Any]]) -> Void)) {
+    fileprivate func load(worklog: TempoRequest, completion: (([[String : Any]]) -> Void)) {
         _ = worklog.params
         completion([entitiesStubs.worklogBeanDic])
     }

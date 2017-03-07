@@ -1,6 +1,6 @@
 import Foundation
 
-struct Worklog: Request {
+struct Worklog: TempoRequest {
     var url: URL = URL(string: "/rest/tempo-timesheets/3/worklogs/")!
     let method: String = "GET"
     let dateFrom: String
