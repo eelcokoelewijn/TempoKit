@@ -7,7 +7,7 @@ public protocol TempoKit {
                  projectKey: String?,
                  accountKey: String?,
                  teamId: String?,
-                 completion: (([WorklogBean]) -> Void))
+                 completion: @escaping ([WorklogBean]) -> Void)
 }
 
 public protocol UsesTempoKit {
@@ -29,7 +29,7 @@ public class MixinTempoKit: TempoKit, UsesTempoNetworkService {
                          projectKey: String? = nil,
                          accountKey: String? = nil,
                          teamId: String? = nil,
-                         completion: (([WorklogBean]) -> Void)) {
+                         completion: @escaping ([WorklogBean]) -> Void) {
         let worklogRequest = Worklog(dateFrom: dateFrom,
                        dateTo: dateTo,
                        username: username,
@@ -38,7 +38,7 @@ public class MixinTempoKit: TempoKit, UsesTempoNetworkService {
                        teamId: teamId,
                        baseURL: baseURL)
         tempoNetworkService.load(worklog: worklogRequest) { json in
-            completion(parse(jsonLogs: json))            
+            completion(self.parse(jsonLogs: json))            
         }
     }
     

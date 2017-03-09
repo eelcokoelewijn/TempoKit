@@ -15,7 +15,7 @@ class TempoKitTests: XCTestCase {
     func testSuccessfulLoadingOfWorklogs() {
         let subject = MixinTempoKit(baseURL: baseURL, networkService: networkService)
         subject.worklogs(dateFrom: "2017-02-28") { result in
-            XCTAssertEqual(result, [entitiesStubs.worklogBean])
+            XCTAssertEqual(result, [self.entitiesStubs.worklogBean])
         }
     }
 
@@ -29,7 +29,7 @@ class TempoKitTests: XCTestCase {
 
 private class NetworkServiceStub: TempoNetworkService {
     private let entitiesStubs = EntitiesStubs()
-    fileprivate func load(worklog: TempoRequest, completion: (([[String : Any]]) -> Void)) {
+    fileprivate func load(worklog: TempoRequest, completion: @escaping ([[String : Any]]) -> Void) {
         _ = worklog.params
         completion([entitiesStubs.worklogBeanDic])
     }
