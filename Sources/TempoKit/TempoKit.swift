@@ -17,10 +17,12 @@ public protocol UsesTempoKit {
 public class MixinTempoKit: TempoKit, UsesTempoNetworkService {
     internal let tempoNetworkService: TempoNetworkService
     private let baseURL: URL
+    private let credentials: JIRACredentials
     
-    public init(baseURL: URL, networkService: TempoNetworkService) {
+    public init(baseURL: URL, networkService: TempoNetworkService, credentials: JIRACredentials) {
         tempoNetworkService = networkService
         self.baseURL = baseURL
+        self.credentials = credentials
     }
     
     public func worklogs(dateFrom: String,
@@ -36,7 +38,8 @@ public class MixinTempoKit: TempoKit, UsesTempoNetworkService {
                        projectKey: projectKey,
                        accountKey: accountKey,
                        teamId: teamId,
-                       baseURL: baseURL)
+                       baseURL: baseURL,
+                       credentials: credentials)
         tempoNetworkService.load(worklog: worklogRequest) { json in
             completion(self.parse(jsonLogs: json))            
         }

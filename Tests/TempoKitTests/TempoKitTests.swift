@@ -5,15 +5,17 @@ class TempoKitTests: XCTestCase {
     var baseURL: URL!
     var networkService: TempoNetworkService!
     var entitiesStubs: EntitiesStubs!
+    var credentials: JIRACredentials!
     
     override func setUp() {
         baseURL = URL(string: "http://atlassian.com")!
         networkService = NetworkServiceStub()
         entitiesStubs = EntitiesStubs()
+        credentials = JIRACredentials(username: "henkkrol", password: "lala888#r2d2")
     }
     
     func testSuccessfulLoadingOfWorklogs() {
-        let subject = MixinTempoKit(baseURL: baseURL, networkService: networkService)
+        let subject = MixinTempoKit(baseURL: baseURL, networkService: networkService, credentials: credentials)
         subject.worklogs(dateFrom: "2017-02-28") { result in
             XCTAssertEqual(result, [self.entitiesStubs.worklogBean])
         }
