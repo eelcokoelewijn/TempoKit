@@ -9,6 +9,7 @@ struct Worklog: TempoRequest {
     let projectKey: String?
     let accountKey: String?
     let teamId: String?
+    let credentials: JIRACredentials
     
     var params: [String : String] {
         get {
@@ -21,13 +22,21 @@ struct Worklog: TempoRequest {
         }
     }
     
+    var headers: [String : String] {
+        get {
+            let basic = Data("\(credentials.username):\(credentials.password)".utf8).base64EncodedString()
+            return ["Authorization": "Basic \(basic)"]
+        }
+    }
+    
     init(dateFrom: String,
          dateTo: String? = nil,
          username: String? = nil,
          projectKey: String? = nil,
          accountKey: String? = nil,
          teamId: String? = nil,
-         baseURL: URL) {
+         baseURL: URL,
+         credentials: JIRACredentials) {
         self.dateFrom = dateFrom
         self.dateTo = dateTo
         self.username = username
@@ -35,5 +44,6 @@ struct Worklog: TempoRequest {
         self.accountKey = accountKey
         self.teamId = teamId
         self.url = URL(string: url.absoluteString, relativeTo: baseURL)!
+        self.credentials = credentials
     }
 }
