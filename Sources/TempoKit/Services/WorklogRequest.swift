@@ -35,15 +35,14 @@ struct Worklog: TempoRequest {
          projectKey: String? = nil,
          accountKey: String? = nil,
          teamId: String? = nil,
-         baseURL: URL,
-         credentials: JIRACredentials) {
+         config: JIRAConfig) {
         self.dateFrom = dateFrom
         self.dateTo = dateTo
         self.username = username
         self.projectKey = projectKey
         self.accountKey = accountKey
         self.teamId = teamId
-        self.url = URL(string: url.absoluteString, relativeTo: baseURL)!
-        self.credentials = credentials
+        self.url = URL(string: url.absoluteString, relativeTo: config.url)!
+        self.credentials = config.credentials
     }
 }
