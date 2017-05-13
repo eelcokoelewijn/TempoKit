@@ -13,37 +13,37 @@ class EntitiesTests: XCTestCase {
     var worklogBeanDic: [String: Any]!
     var worklogBean: WorklogBean!
     var entitiesStubs: EntitiesStubs!
-    
+
     override func setUp() {
         super.setUp()
         entitiesStubs = EntitiesStubs()
     }
-    
+
     func testIfAuthorIsEqual() {
         let subject = Author(json: entitiesStubs.authorDic)
         XCTAssertEqual(subject, entitiesStubs.author)
     }
-    
+
     func testIfIssueTypeIsEqual() {
         let subject = IssueType(json: entitiesStubs.issueTypeDic)
         XCTAssertEqual(subject, entitiesStubs.issueType)
     }
-    
+
     func testIfIssueIsEqual() {
         let subject = Issue(json: entitiesStubs.issueDic)
         XCTAssertEqual(subject, entitiesStubs.issue)
     }
-    
+
     func testIfWorklogBeanIsEqual() {
         let subject = WorklogBean(json: entitiesStubs.worklogBeanDic)
         XCTAssertEqual(subject, entitiesStubs.worklogBean)
     }
-    
-    static var allTests : [(String, (EntitiesTests) -> () throws -> Void)] {
+
+    static var allTests: [(String, (EntitiesTests) -> () throws -> Void)] {
         return [
             ("testIfAuthorIsEqual", testIfAuthorIsEqual),
             ("testIfIssueTypeIsEqual", testIfIssueTypeIsEqual),
-            ("testIfIssueIsEqual",testIfIssueIsEqual),
+            ("testIfIssueIsEqual", testIfIssueIsEqual),
             ("testIfWorklogBeanIsEqual", testIfWorklogBeanIsEqual)
         ]
     }

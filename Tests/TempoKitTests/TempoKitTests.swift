@@ -7,7 +7,7 @@ class TempoKitTests: XCTestCase {
     var entitiesStubs: EntitiesStubs!
     var config: JIRAConfig!
     var jsonDic: [String: Any]!
-    
+
     override func setUp() {
         baseURL = URL(string: "http://atlassian.com")!
         networkService = NetworkServiceStub()
@@ -18,7 +18,7 @@ class TempoKitTests: XCTestCase {
                        "username": "henkkrol",
                        "password": "lala888#r2d2"]
     }
-    
+
     func testSuccessfulLoadingOfWorklogs() {
         let subject = MixinTempoKit(networkService: networkService, config: config)
         subject.worklogs(dateFrom: "2017-02-28") { result in
@@ -31,21 +31,21 @@ class TempoKitTests: XCTestCase {
                                  credentials: JIRACredentials(username: "henkkrol", password: "lala888#r2d2"))
         XCTAssertEqual(subject, config)
     }
-    
+
     func testConvertingJSONDicToJIRAConfig() {
         let subject = JIRAConfig(json: jsonDic)
-        
+
         XCTAssertEqual(subject, config)
     }
-    
+
     func testGettingJSONRepresentationFromJIRAConfig() {
         let subject = config.toJSON()
         XCTAssertEqual(subject["url"] as? String, jsonDic["url"] as? String)
         XCTAssertEqual(subject["username"] as? String, jsonDic["username"] as? String)
         XCTAssertEqual(subject["password"] as? String, jsonDic["password"] as? String)
     }
-    
-    static var allTests : [(String, (TempoKitTests) -> () throws -> Void)] {
+
+    static var allTests: [(String, (TempoKitTests) -> () throws -> Void)] {
         return [
             ("testSuccessfulLoadingOfWorklogs", testSuccessfulLoadingOfWorklogs),
             ("testConfigIsCreatedCorrect", testConfigIsCreatedCorrect),
@@ -54,7 +54,6 @@ class TempoKitTests: XCTestCase {
         ]
     }
 }
-
 
 private class NetworkServiceStub: TempoNetworkService {
     private let entitiesStubs = EntitiesStubs()

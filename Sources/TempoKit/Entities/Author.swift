@@ -33,8 +33,8 @@ extension Author {
 extension Author: Equatable {
     public static func == (lhs: Author, rhs: Author) -> Bool {
             return lhs.name == rhs.name &&
-                lhs.displayName == rhs.displayName && 
-                lhs.avatar == rhs.avatar && 
+                lhs.displayName == rhs.displayName &&
+                lhs.avatar == rhs.avatar &&
                 lhs.url == rhs.url
     }
 }

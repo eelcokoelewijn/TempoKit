@@ -10,25 +10,21 @@ struct Worklog: TempoRequest {
     let accountKey: String?
     let teamId: String?
     let credentials: JIRACredentials
-    
+
     var params: [String : String] {
-        get {
-            return ["dateFrom": dateFrom,
-                    "dateTo": dateTo ?? "",
-                    "username": username ?? "",
-                    "projectKey": projectKey ?? "",
-                    "accountKey": accountKey ?? "",
-                    "teamId": teamId ?? ""]
-        }
+        return ["dateFrom": dateFrom,
+                "dateTo": dateTo ?? "",
+                "username": username ?? "",
+                "projectKey": projectKey ?? "",
+                "accountKey": accountKey ?? "",
+                "teamId": teamId ?? ""]
     }
-    
+
     var headers: [String : String] {
-        get {
-            let basic = Data("\(credentials.username):\(credentials.password)".utf8).base64EncodedString()
-            return ["Authorization": "Basic \(basic)"]
-        }
+        let basic = Data("\(credentials.username):\(credentials.password)".utf8).base64EncodedString()
+        return ["Authorization": "Basic \(basic)"]
     }
-    
+
     init(dateFrom: String,
          dateTo: String? = nil,
          username: String? = nil,

@@ -1,7 +1,7 @@
 import Foundation
 
 public struct WorklogBean {
-    public let id: Int
+    public let worklogId: Int
     public let comment: String
     public let timeSpentSeconds: Int
     public let billedSeconds: Int
@@ -12,8 +12,8 @@ public struct WorklogBean {
 
 extension WorklogBean {
     public init?(json: [String: Any]) {
-        guard let id = json["id"] as? Int else { return nil }
-        self.id = id
+        guard let worklogId = json["id"] as? Int else { return nil }
+        self.worklogId = worklogId
         guard let comment = json["comment"] as? String else { return nil }
         self.comment = comment
         guard let timeSpentSeconds = json["timeSpentSeconds"] as? Int else { return nil }
@@ -25,7 +25,7 @@ extension WorklogBean {
         guard let authorJSON = json["author"] as? [String: Any],
             let author = Author(json: authorJSON) else { return nil }
         self.author = author
-        
+
         guard let issueJSON = json["issue"] as? [String: Any],
             let issue = Issue(json: issueJSON) else { return nil }
         self.issue = issue
@@ -34,11 +34,11 @@ extension WorklogBean {
 
 extension WorklogBean: Equatable {
     public static func == (lhs: WorklogBean, rhs: WorklogBean) -> Bool {
-            return lhs.id == rhs.id &&
-                lhs.comment == rhs.comment && 
-                lhs.timeSpentSeconds == rhs.timeSpentSeconds && 
-                lhs.billedSeconds == rhs.billedSeconds && 
-                lhs.dateStarted == rhs.dateStarted && 
+            return lhs.worklogId == rhs.worklogId &&
+                lhs.comment == rhs.comment &&
+                lhs.timeSpentSeconds == rhs.timeSpentSeconds &&
+                lhs.billedSeconds == rhs.billedSeconds &&
+                lhs.dateStarted == rhs.dateStarted &&
                 lhs.author == rhs.author
     }
 }

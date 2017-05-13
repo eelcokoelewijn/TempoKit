@@ -10,7 +10,7 @@ struct EntitiesStubs {
     var issue: Issue
     var worklogBeanDic: [String: Any]
     var worklogBean: WorklogBean
-    
+
     init() {
         authorDic = ["name": "Jan",
                      "displayName": "Jan de Man",
@@ -23,7 +23,7 @@ struct EntitiesStubs {
         issueTypeDic = ["name": "task",
                         "iconUrl": "http://icon"]
         issueType = IssueType(name: "task", iconURL: URL(string: "http://icon")!)
-        
+
         issueDic = ["key": "xxx",
                     "id": 2,
                     "self": "http://issue",
@@ -32,22 +32,22 @@ struct EntitiesStubs {
                     "projectId": 1000,
                     "issueType": issueTypeDic]
         issue = Issue(key: "xxx",
-                      id: 2,
+                      issueId: 2,
                       url: URL(string: "http://issue")!,
                       remainingEstimateSeconds: 1000,
                       summary: "issue summary",
                       projectId: 1000,
                       issueType: issueType)
-        
-        worklogBeanDic = ["id":1,
-                          "comment":"comment",
-                          "timeSpentSeconds":1000,
-                          "billedSeconds":1000,
+
+        worklogBeanDic = ["id": 1,
+                          "comment": "comment",
+                          "timeSpentSeconds": 1000,
+                          "billedSeconds": 1000,
                           "dateStarted": "2017-02-28",
                           "author": authorDic,
                           "issue": issueDic]
-        
-        worklogBean = WorklogBean(id: 1,
+
+        worklogBean = WorklogBean(worklogId: 1,
                                   comment: "comment",
                                   timeSpentSeconds: 1000,
                                   billedSeconds: 1000,
